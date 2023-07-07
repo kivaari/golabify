@@ -8,14 +8,12 @@ import (
 	"strconv"
 )
 
-// Обработчик главной странице.
 func home(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
 
-	// Инициализируем срез содержащий пути к трем файлам.
 	files := []string{
 		"./ui/html/home.page.tmpl",
 		"./ui/html/base.layout.tmpl",
@@ -29,7 +27,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Записи содержимого шаблона в тело HTTP ответа.
 	err = ts.Execute(w, nil)
 	if err != nil {
 		log.Println(err.Error())
@@ -37,7 +34,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Обработчик для отображения содержимого.
 func showSnippet(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil || id < 1 {
@@ -48,7 +44,6 @@ func showSnippet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Отображение выбранной заметки с ID %d...", id)
 }
 
-// Обработчик для создания новой заметки.
 func createSnippet(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodPost)
