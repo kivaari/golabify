@@ -1,0 +1,26 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <title>{{template "title" .}} - Golabify</title>
+    </head>
+    
+    <body>
+        <header>
+            <h1><a href='/'>Golabify</a></h1>
+        </header>
+        <nav>
+            <a href='/'>Home</a>
+            <a href='#'>Physic</a>
+            <a href='#'>Math</a>
+        </nav>
+        
+        <main>
+            {{template "main" .}}
+        </main>
+        <!-- Вызываем шаблон подвала -->
+        {{template "footer" .}}
+    </body>
+</html>
+{{end}}
